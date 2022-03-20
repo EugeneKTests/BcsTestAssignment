@@ -1,13 +1,12 @@
 package bcs.testassignment;
 
 import bcs.testassignment.exception.IexCloudException;
-import bcs.testassignment.handler.SplitByAllocationsHandler;
+import bcs.testassignment.handler.SplitByAllocationsService;
 import bcs.testassignment.model.ErrorResponse;
 import bcs.testassignment.model.StocksRequest;
 import bcs.testassignment.model.StocksResponse;
 import bcs.testassignment.utils.ValidateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
@@ -21,10 +20,10 @@ import java.io.IOException;
 @RestController
 public class StocksController {
 
-    private SplitByAllocationsHandler splitByAllocationsHandler;
+    private SplitByAllocationsService splitByAllocationsHandler;
 
     @Autowired
-    public StocksController(SplitByAllocationsHandler splitByAllocationsHandler) {
+    public StocksController(SplitByAllocationsService splitByAllocationsHandler) {
         this.splitByAllocationsHandler = splitByAllocationsHandler;
     }
 

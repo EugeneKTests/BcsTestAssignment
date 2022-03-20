@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 
 @Getter
 @Setter
-public class IexCloudException extends Exception {
+public class IexCloudException extends RuntimeException {
 
     private HttpStatus httpStatus;
     private String symbol;
