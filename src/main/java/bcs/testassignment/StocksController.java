@@ -6,28 +6,25 @@ import bcs.testassignment.model.ErrorResponse;
 import bcs.testassignment.model.StocksRequest;
 import bcs.testassignment.model.StocksResponse;
 import bcs.testassignment.utils.ValidateUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 
 @RestController
+@RequiredArgsConstructor
+@Slf4j
 public class StocksController {
 
-    private SplitByAllocationsService splitByAllocationsHandler;
+    private final SplitByAllocationsService splitByAllocationsHandler;
 
-    @Autowired
-    public StocksController(SplitByAllocationsService splitByAllocationsHandler) {
-        this.splitByAllocationsHandler = splitByAllocationsHandler;
-    }
-
-    @RequestMapping(path = "/calculate", method = RequestMethod.POST, produces = "application/json")
+    @PostMapping(path = "/calculate", produces = "application/json")
     public ResponseEntity<?> splitByAllocation(@RequestBody StocksRequest stocksRequest) {
         if (CollectionUtils.isEmpty(stocksRequest.getStocks())) {
             return new ResponseEntity<>(new ErrorResponse("Stocks is empty"), HttpStatus.BAD_REQUEST);
